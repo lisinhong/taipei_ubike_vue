@@ -1,11 +1,17 @@
 <template>
-  <div id="app"></div>
+  <div id="app">
+    <Map></Map>
+  </div>
 </template>
 
 <script>
+import Map from './components/Map.vue';
+
 export default {
   name: 'App',
-  components: {},
+  components: {
+    Map,
+  },
 };
 </script>
 
