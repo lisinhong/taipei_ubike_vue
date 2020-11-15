@@ -12,6 +12,10 @@ export default {
   components: {
     Map,
   },
+  setup(props, context) {
+    const store = context.root.$store;
+    store.dispatch('getUbikeInfo');
+  },
 };
 </script>
 

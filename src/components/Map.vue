@@ -1,14 +1,28 @@
 <template>
   <l-map :center="center" :zoom="zoom">
     <l-tile-layer :url="url" />
-    <l-marker :lat-lng="center"></l-marker>
+    <l-marker
+      v-for="ubike in ubikeInfo"
+      :key="`marker-${ubike.sno}`"
+      :lat-lng="formatLatLng(ubike)"
+    >
+      <l-tooltip class="tooltip-wrapper">
+        <ul>
+          <li>地點：{{ ubike.sna }}</li>
+          <li>uBike 數量：{{ ubike.sbi }} / {{ ubike.tot }}</li>
+          <li>更新時間：{{ formatDate(ubike.mday) }}</li>
+        </ul>
+      </l-tooltip></l-marker
+    >
   </l-map>
 </template>
 
 <script>
-import { ref } from '@vue/composition-api';
-import L, { latLng } from 'leaflet';
-import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+import { ref, computed } from '@vue/composition-api';
+import { latLng } from 'leaflet';
+import {
+  LMap, LTileLayer, LMarker, LTooltip,
+} from 'vue2-leaflet';
 
 export default {
   name: 'Map',
@@ -16,16 +30,32 @@ export default {
     LMap,
     LTileLayer,
     LMarker,
+    LTooltip,
   },
-  setup() {
+  setup(props, context) {
+    const store = context.root.$store;
     const url = ref('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-    const center = ref(latLng(25.0140071, 121.4648195));
-    const zoom = ref(16);
+    const center = ref(latLng(25.0339808, 121.5623502));
+    const zoom = ref(14);
+    const ubikeInfo = computed(() => store.getters.ubikeInfo);
+    const formatLatLng = (info) => [info.lat, info.lng];
+    const formatDate = (date) => {
+      const YYYY = date.substring(0, 4);
+      const MM = date.substring(4, 6);
+      const DD = date.substring(6, 8);
+      const HH = date.substring(8, 10);
+      const mm = date.substring(10, 12);
+
+      return `${YYYY}/${MM}/${DD} ${HH}:${mm}`;
+    };
 
     return {
       url,
       center,
       zoom,
+      ubikeInfo,
+      formatLatLng,
+      formatDate,
     };
   },
 };

@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'leaflet/dist/leaflet.css';
 
+// Fix leaflet marker icon missing
 // eslint-disable-next-line no-underscore-dangle
 delete Icon.Default.prototype._getIconUrl;
 Icon.Default.mergeOptions({
