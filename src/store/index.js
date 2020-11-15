@@ -21,8 +21,7 @@ export default new Vuex.Store({
   },
   getters: {
     ubikeInfo(state) {
-      return Object.keys(state.sourceUbikeInfo).slice(0, 4)
-        .map((key) => state.sourceUbikeInfo[key]);
+      return state.sourceUbikeInfo;
     },
   },
   modules: {
