@@ -7,10 +7,22 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     sourceUbikeInfo: {},
+    selectedDistrict: null,
+    showAvailableOnly: false,
+    showActiveOnly: false,
   },
   mutations: {
     setUbikeInfo(state, data) {
       state.sourceUbikeInfo = data;
+    },
+    setSelectedDistrict(state, district) {
+      state.selectedDistrict = district;
+    },
+    setShowAvailableOnly(state, value) {
+      state.showAvailableOnly = value;
+    },
+    setShowActiveOnly(state, value) {
+      state.showActiveOnly = value;
     },
   },
   actions: {
@@ -21,7 +33,14 @@ export default new Vuex.Store({
   },
   getters: {
     ubikeInfo(state) {
-      return state.sourceUbikeInfo;
+      const {
+        sourceUbikeInfo, selectedDistrict, showAvailableOnly, showActiveOnly,
+      } = state;
+
+      return Object.values(sourceUbikeInfo)
+        .filter((info) => (selectedDistrict === null ? true : selectedDistrict === info.sarea))
+        .filter((info) => (showAvailableOnly ? info.sbi > 0 : true))
+        .filter((info) => (showActiveOnly ? info.act === '1' : true));
     },
     districtList(state) {
       const ubikeInfo = state.sourceUbikeInfo;

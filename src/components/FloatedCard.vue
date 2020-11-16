@@ -2,7 +2,7 @@
   <b-card class="floated-card" bg-variant="light" no-body>
     <template #header>
       <div class="d-flex align-items-center justify-content-between">
-        <h4 class="mb-0">站點顯示選項</h4>
+        <h5 class="mb-0">站點顯示選項</h5>
         <b-button
           class="p-0 ml-4"
           v-b-toggle.collapse-1
@@ -20,12 +20,13 @@
             <b-form-select-option :value="null" disabled
               >請選擇行政區</b-form-select-option
             >
+            <b-form-select-option :value="null">全部</b-form-select-option>
           </template>
         </b-form-select>
-        <b-form-checkbox v-model="showAvailableOnly"
+        <b-form-checkbox class="mt-2" v-model="showAvailableOnly" switch
           >只顯示尚有車輛的站點
         </b-form-checkbox>
-        <b-form-checkbox v-model="showActiveOnly"
+        <b-form-checkbox class="mt-2" v-model="showActiveOnly" switch
           >只顯示運作中的站點
         </b-form-checkbox>
       </div>
@@ -65,9 +66,24 @@ export default {
   setup(props, context) {
     const store = context.root.$store;
     const districtList = computed(() => store.getters.districtList);
-    const selectedDistrict = ref(null);
-    const showAvailableOnly = ref(false);
-    const showActiveOnly = ref(false);
+    const selectedDistrict = computed({
+      get: () => store.state.selectedDistrict,
+      set: (district) => {
+        store.commit('setSelectedDistrict', district);
+      },
+    });
+    const showAvailableOnly = computed({
+      get: () => store.state.showAvailableOnly,
+      set: (value) => {
+        store.commit('setShowAvailableOnly', value);
+      },
+    });
+    const showActiveOnly = computed({
+      get: () => store.state.showActiveOnly,
+      set: (value) => {
+        store.commit('setShowActiveOnly', value);
+      },
+    });
     const isCollapsed = ref(true);
 
     return {
@@ -91,13 +107,10 @@ export default {
   right: 4%;
   z-index: 10000;
   box-shadow: 0 0.5rem 1rem rgba($gray-100, 0.5);
+  width: 250px;
 
   .card-content {
     padding: 0.75rem 1.25rem;
   }
-}
-
-.custom-checkbox {
-  margin-top: 20px;
 }
 </style>
