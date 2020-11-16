@@ -1,12 +1,13 @@
 /* eslint-disable global-require */
 import Vue from 'vue';
 import VueCompositionAPI from '@vue/composition-api';
-import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
+import { LayoutPlugin } from 'bootstrap-vue';
 import { Icon } from 'leaflet';
 import App from './App.vue';
 import store from './store';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+import './styles/_override.scss';
 import 'leaflet/dist/leaflet.css';
 
 // Fix leaflet marker icon missing
@@ -21,8 +22,7 @@ Icon.Default.mergeOptions({
 Vue.config.productionTip = false;
 
 Vue.use(VueCompositionAPI);
-Vue.use(BootstrapVue);
-Vue.use(BootstrapVueIcons);
+Vue.use(LayoutPlugin);
 
 new Vue({
   store,

@@ -23,6 +23,12 @@ export default new Vuex.Store({
     ubikeInfo(state) {
       return state.sourceUbikeInfo;
     },
+    districtList(state) {
+      const ubikeInfo = state.sourceUbikeInfo;
+      const allDistrictList = Object.values(ubikeInfo).map((info) => info.sarea);
+
+      return allDistrictList.filter((district, index, self) => self.indexOf(district) === index);
+    },
   },
   modules: {
   },
