@@ -98,9 +98,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/styles/custom-vars.scss';
-@import '~bootstrap/scss/bootstrap';
-@import '~bootstrap-vue/src/index.scss';
+@import "~@/styles/custom-vars.scss";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-vue/src/index.scss";
 
 .floated-card {
   position: fixed;
@@ -116,6 +116,18 @@ export default {
 
   .card-content {
     padding: 0.75rem 1.25rem;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .floated-card {
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    .card-content {
+      padding: 1rem 1.25rem;
+    }
   }
 }
 </style>

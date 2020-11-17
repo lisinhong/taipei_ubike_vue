@@ -1,6 +1,7 @@
 <template>
-  <l-map ref="myMap">
+  <l-map ref="myMap" :options="{ zoomControl: false }">
     <l-tile-layer :url="url" />
+    <l-control-zoom position="bottomleft"></l-control-zoom>
     <l-marker-cluster>
       <l-marker
         v-for="ubike in ubikeInfo"
@@ -22,7 +23,11 @@
 <script>
 import { ref, computed, watch } from '@vue/composition-api';
 import {
-  LMap, LTileLayer, LMarker, LTooltip,
+  LMap,
+  LTileLayer,
+  LMarker,
+  LTooltip,
+  LControlZoom,
 } from 'vue2-leaflet';
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
@@ -35,6 +40,7 @@ export default {
     LTileLayer,
     LMarker,
     LTooltip,
+    LControlZoom,
     LMarkerCluster: Vue2LeafletMarkerCluster,
   },
   setup(props, context) {
