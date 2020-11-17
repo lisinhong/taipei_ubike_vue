@@ -29,11 +29,11 @@ export default {
 </script>
 
 <style lang="scss">
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
+@import '~@/styles/custom-vars.scss';
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-vue/src/index.scss';
+@import '~@/styles/override.scss';
+@import '~leaflet/dist/leaflet.css';
 
 #app {
   width: 100%;
@@ -41,6 +41,7 @@ body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: $dark;
 }
 
 .vue2leaflet-map {

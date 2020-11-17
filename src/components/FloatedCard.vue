@@ -1,5 +1,5 @@
 <template>
-  <b-card class="floated-card" bg-variant="light" no-body>
+  <b-card class="floated-card" no-body>
     <template #header>
       <div class="d-flex align-items-center justify-content-between">
         <h5 class="mb-0">站點顯示選項</h5>
@@ -98,16 +98,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~bootstrap";
-@import "~bootstrap-vue";
+@import '~@/styles/custom-vars.scss';
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-vue/src/index.scss';
 
 .floated-card {
   position: fixed;
   top: 10%;
   right: 4%;
   z-index: 10000;
-  box-shadow: 0 0.5rem 1rem rgba($gray-100, 0.5);
+  box-shadow: $card-box-shadow;
   width: 250px;
+
+  .btn {
+    color: $dark;
+  }
 
   .card-content {
     padding: 0.75rem 1.25rem;

@@ -5,10 +5,7 @@ import { LayoutPlugin } from 'bootstrap-vue';
 import { Icon } from 'leaflet';
 import App from './App.vue';
 import store from './store';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
-import './styles/_override.scss';
-import 'leaflet/dist/leaflet.css';
+// import 'leaflet/dist/leaflet.css';
 
 // Fix leaflet marker icon missing
 // eslint-disable-next-line no-underscore-dangle
