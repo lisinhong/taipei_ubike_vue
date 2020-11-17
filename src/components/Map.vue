@@ -1,5 +1,5 @@
 <template>
-  <l-map ref="myMap" :center="center" :zoom="zoom">
+  <l-map ref="myMap">
     <l-tile-layer :url="url" />
     <l-marker-cluster>
       <l-marker
@@ -40,8 +40,6 @@ export default {
   setup(props, context) {
     const store = context.root.$store;
     const url = ref('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-    const center = ref([25.0339808, 121.5623502]);
-    const zoom = ref(13);
     const ubikeInfo = computed(() => store.getters.ubikeInfo);
     const formatLatLng = (info) => [info.lat, info.lng];
     const formatDate = (date) => {
@@ -57,14 +55,15 @@ export default {
       () => ubikeInfo.value,
       (info) => {
         const bounds = info.map((element) => formatLatLng(element));
-        context.refs.myMap.mapObject.fitBounds(bounds, { animate: true, duration: 1 });
+        context.refs.myMap.mapObject.fitBounds(bounds, {
+          animate: true,
+          duration: 1,
+        });
       },
     );
 
     return {
       url,
-      center,
-      zoom,
       ubikeInfo,
       formatLatLng,
       formatDate,
