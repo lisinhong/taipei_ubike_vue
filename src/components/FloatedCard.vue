@@ -20,7 +20,7 @@
             <b-form-select-option :value="null" disabled
               >請選擇行政區</b-form-select-option
             >
-            <b-form-select-option :value="null">全部</b-form-select-option>
+            <b-form-select-option :value="0">全部</b-form-select-option>
           </template>
         </b-form-select>
         <b-form-checkbox class="mt-2" v-model="showAvailableOnly" switch

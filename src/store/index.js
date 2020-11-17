@@ -38,7 +38,7 @@ export default new Vuex.Store({
       } = state;
 
       return Object.values(sourceUbikeInfo)
-        .filter((info) => (selectedDistrict === null ? true : selectedDistrict === info.sarea))
+        .filter((info) => (!selectedDistrict ? true : selectedDistrict === info.sarea))
         .filter((info) => (showAvailableOnly ? info.sbi > 0 : true))
         .filter((info) => (showActiveOnly ? info.act === '1' : true));
     },

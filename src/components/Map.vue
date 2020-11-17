@@ -1,5 +1,5 @@
 <template>
-  <l-map :center="center" :zoom="zoom">
+  <l-map ref="myMap" :center="center" :zoom="zoom">
     <l-tile-layer :url="url" />
     <l-marker-cluster>
       <l-marker
@@ -20,8 +20,7 @@
 </template>
 
 <script>
-import { ref, computed } from '@vue/composition-api';
-import { latLng } from 'leaflet';
+import { ref, computed, watch } from '@vue/composition-api';
 import {
   LMap, LTileLayer, LMarker, LTooltip,
 } from 'vue2-leaflet';
@@ -41,8 +40,8 @@ export default {
   setup(props, context) {
     const store = context.root.$store;
     const url = ref('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-    const center = ref(latLng(25.0339808, 121.5623502));
-    const zoom = ref(12);
+    const center = ref([25.0339808, 121.5623502]);
+    const zoom = ref(13);
     const ubikeInfo = computed(() => store.getters.ubikeInfo);
     const formatLatLng = (info) => [info.lat, info.lng];
     const formatDate = (date) => {
@@ -54,6 +53,13 @@ export default {
 
       return `${YYYY}/${MM}/${DD} ${HH}:${mm}`;
     };
+    watch(
+      () => ubikeInfo.value,
+      (info) => {
+        const bounds = info.map((element) => formatLatLng(element));
+        context.refs.myMap.mapObject.fitBounds(bounds, { animate: true, duration: 1 });
+      },
+    );
 
     return {
       url,
