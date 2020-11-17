@@ -9,11 +9,15 @@
         :lat-lng="formatLatLng(ubike)"
       >
         <l-tooltip class="tooltip-wrapper">
-          <ul>
-            <li>地點：{{ ubike.sna }}</li>
-            <li>uBike 數量：{{ ubike.sbi }} / {{ ubike.tot }}</li>
-            <li>更新時間：{{ formatDate(ubike.mday) }}</li>
-          </ul>
+          <b-list-group>
+            <b-list-group-item>地點：{{ ubike.sna }}</b-list-group-item>
+            <b-list-group-item
+              >uBike 數量：{{ ubike.sbi }} / {{ ubike.tot }}</b-list-group-item
+            >
+            <b-list-group-item
+              >更新時間：{{ formatDate(ubike.mday) }}</b-list-group-item
+            >
+          </b-list-group>
         </l-tooltip></l-marker
       >
     </l-marker-cluster>
@@ -30,6 +34,7 @@ import {
   LControlZoom,
 } from 'vue2-leaflet';
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
+import { BListGroup, BListGroupItem } from 'bootstrap-vue';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 
@@ -42,6 +47,8 @@ export default {
     LTooltip,
     LControlZoom,
     LMarkerCluster: Vue2LeafletMarkerCluster,
+    BListGroup,
+    BListGroupItem,
   },
   setup(props, context) {
     const store = context.root.$store;
@@ -79,4 +86,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.tooltip-wrapper {
+}
 </style>
