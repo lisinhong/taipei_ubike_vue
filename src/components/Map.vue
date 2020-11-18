@@ -37,6 +37,7 @@ import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
 import { BListGroup, BListGroupItem } from 'bootstrap-vue';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
+import useFormat from '../utils/useFormat';
 
 export default {
   name: 'Map',
@@ -54,16 +55,8 @@ export default {
     const store = context.root.$store;
     const url = ref('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
     const ubikeInfo = computed(() => store.getters.ubikeInfo);
-    const formatLatLng = (info) => [info.lat, info.lng];
-    const formatDate = (date) => {
-      const YYYY = date.substring(0, 4);
-      const MM = date.substring(4, 6);
-      const DD = date.substring(6, 8);
-      const HH = date.substring(8, 10);
-      const mm = date.substring(10, 12);
+    const { formatDate, formatLatLng } = useFormat();
 
-      return `${YYYY}/${MM}/${DD} ${HH}:${mm}`;
-    };
     watch(
       () => ubikeInfo.value,
       (info) => {
@@ -86,6 +79,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tooltip-wrapper {
-}
 </style>
